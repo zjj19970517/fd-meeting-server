@@ -14,5 +14,18 @@ export const genProductionConfig = (): IConfig => {
       poolSize: 10,
       connectorPackage: 'mysql2',
     },
+    redis: {
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
+    },
+    email: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+    jwt: {
+      secret: process.env.JWT_SECRET,
+      accessTokenExpiresTime: process.env.JWT_ACCESS_TOKEN_EXPIRES_TIME,
+      refreshTokenExpiresTime: process.env.JWT_REFRESH_TOKEN_EXPIRES_TIME,
+    },
   };
 };

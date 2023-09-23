@@ -15,6 +15,19 @@ export interface IConfig {
     poolSize: number;
     connectorPackage: 'mysql' | 'mysql2';
   };
+  redis: {
+    host: string;
+    port: string;
+  };
+  email: {
+    user: string;
+    pass: string;
+  };
+  jwt: {
+    secret: string;
+    accessTokenExpiresTime: string;
+    refreshTokenExpiresTime: string;
+  };
 }
 
 export default (): IConfig => {
