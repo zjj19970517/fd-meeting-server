@@ -207,4 +207,41 @@ export class UserService {
     };
     return userVo;
   }
+
+  /**
+   * 通过用户 ID 获取用户信息
+   * @param userId
+   * @param isAdmin
+   */
+  async findUserById(userId: number, isAdmin: boolean) {
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+        isAdmin,
+      },
+      relations: ['roles', 'roles.permissions'],
+    });
+    const userVo = new LoginUserVo();
+    userVo.userInfo = {
+      id: user.id,
+      username: user.username,
+      nickName: user.nickName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      avatar: user.avatar,
+      createTime: user.createTime.getTime(),
+      isFrozen: user.isFrozen,
+      isAdmin: user.isAdmin,
+      roles: user.roles.map((item) => item.name),
+      permissions: user.roles.reduce((arr, item) => {
+        item.permissions.forEach((permission) => {
+          if (arr.indexOf(permission) === -1) {
+            arr.push(permission);
+          }
+        });
+        return arr;
+      }, []),
+    };
+    return userVo;
+  }
 }

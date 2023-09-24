@@ -1,6 +1,15 @@
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { Controller, Get, Post, Body, Query, Inject } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Query,
+  Inject,
+  UnauthorizedException,
+  Logger,
+} from '@nestjs/common';
 
 // dto
 import { UserLoginDto } from './dto/user-login.dto';
@@ -13,6 +22,8 @@ import { JWTHelperService } from './../../shared/services/jwt-helper.service';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  private logger = new Logger();
 
   @Inject(JwtService)
   private jwtService: JwtService;
@@ -79,5 +90,32 @@ export class UserController {
     // 生成刷新 token
     userVo.refreshToken = this.jwtHelperService.genRefreshToken(userVo);
     return userVo;
+  }
+
+  /**
+   * token 过期，刷新 Token
+   * @param refreshToken
+   * @returns
+   */
+  @Get('refresh-token')
+  async refreshToken(
+    @Query('refreshToken') refreshToken: string,
+    @Query('isAdmin') isAdmin = false,
+  ) {
+    try {
+      const data = this.jwtService.verify(refreshToken);
+      const userVo = await this.userService.findUserById(data.userId, isAdmin);
+      // 生成鉴权 token
+      const access_token = this.jwtHelperService.genAccessToken(userVo);
+      // 生成刷新 token
+      const refresh_token = this.jwtHelperService.genRefreshToken(userVo);
+      return {
+        access_token,
+        refresh_token,
+      };
+    } catch (e) {
+      this.logger.error(e.message, e.stack);
+      throw new UnauthorizedException('token 已失效，请重新登录');
+    }
   }
 }
