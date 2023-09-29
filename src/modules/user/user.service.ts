@@ -213,7 +213,7 @@ export class UserService {
    * @param userId
    * @param isAdmin
    */
-  async findUserById(userId: number, isAdmin: boolean) {
+  async findUserById(userId: number, isAdmin: boolean = false) {
     const user = await this.userRepository.findOne({
       where: {
         id: userId,

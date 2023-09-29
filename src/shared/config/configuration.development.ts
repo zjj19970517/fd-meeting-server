@@ -3,6 +3,7 @@ import { IConfig } from './configuration';
 export const genDevelopmentConfig = (): IConfig => {
   return {
     port: process.env.PORT,
+    timeout: process.env.TIMEOUT,
     mysql: {
       host: process.env.MYSQL_HOST,
       port: process.env.MYSQL_PORT,

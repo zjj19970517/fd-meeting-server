@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 
 import { AppService } from './app.service';
 import { GuardProviders } from './shared/providers/guard.providers';
+import { InterceptorProviders } from './shared/providers/interceptor.providers';
 
 import { SharedModule } from './shared/share.module';
 import { UserModule } from './modules/user/user.module';
@@ -16,6 +17,6 @@ import { UserModule } from './modules/user/user.module';
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ...GuardProviders],
+  providers: [AppService, ...GuardProviders, ...InterceptorProviders],
 })
 export class AppModule {}

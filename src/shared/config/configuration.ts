@@ -4,6 +4,7 @@ import { genProductionConfig } from './configuration.production';
 
 export interface IConfig {
   port: string | number; // 应用端口
+  timeout: string; // 超时
   mysql: {
     host: string;
     port: number | string;

@@ -19,6 +19,10 @@ import { RegisterUserDto } from './dto/register-user.dto';
 import { UserService } from './user.service';
 import { JWTHelperService } from './../../shared/services/jwt-helper.service';
 
+// decorators
+import { NeedLogin } from 'src/shared/decorators/guard.decorator';
+import { GetLoginUserInfo } from 'src/shared/decorators/user-info-decorator';
+
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -117,5 +121,18 @@ export class UserController {
       this.logger.error(e.message, e.stack);
       throw new UnauthorizedException('token 已失效，请重新登录');
     }
+  }
+
+  /**
+   * POST 用户信息查询
+   * @path /user/info
+   */
+  @Post('info')
+  @NeedLogin()
+  async getUserInfo(@GetLoginUserInfo('userId') userId: number) {
+    if (!userId) {
+      throw new UnauthorizedException('用户未登录');
+    }
+    return await this.userService.findUserById(userId);
   }
 }
