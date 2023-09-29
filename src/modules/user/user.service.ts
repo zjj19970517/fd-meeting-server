@@ -15,13 +15,18 @@ import { Permission } from './entities/permission.entity';
 // dto
 import { RegisterUserDto } from './dto/register-user.dto';
 import { UserLoginDto } from './dto/user-login.dto';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 
 // vo
 import { LoginUserVo } from './vo/login-user.vo';
 
 // utils
 import { md5Encrypt } from 'src/shared/utils/md5.utils';
-import { genCaptchaCode, getCaptchaCacheKey } from './user.utils';
+import {
+  genCaptchaCode,
+  getCaptchaCacheKey,
+  getCaptchaCacheKeyOfUpdatePwd,
+} from './user.utils';
 
 // services
 import { RedisHelperService } from 'src/shared/services/redis-helper.service';
@@ -243,5 +248,62 @@ export class UserService {
       }, []),
     };
     return userVo;
+  }
+
+  /**
+   * 修改密码
+   * @param userId 用户 ID
+   * @param updatePasswordDto 更新密码的相关参数
+   * @returns
+   */
+  async updatePassword(userId: number, updatePasswordDto: UpdatePasswordDto) {
+    const captcha = await this.redisHelperService.get(
+      getCaptchaCacheKeyOfUpdatePwd(updatePasswordDto.email),
+    );
+
+    if (!captcha) {
+      throw new HttpException('验证码已失效', HttpStatus.BAD_REQUEST);
+    }
+
+    if (updatePasswordDto.captcha !== captcha) {
+      throw new HttpException('验证码不正确', HttpStatus.BAD_REQUEST);
+    }
+
+    try {
+      const user = await this.userRepository.findOneBy({
+        id: userId,
+      });
+      user.password = md5Encrypt(updatePasswordDto.password);
+      await this.userRepository.save(user);
+      return '密码修改成功';
+    } catch (e) {
+      this.logger.error(e, UserService);
+      return '密码修改失败';
+    }
+  }
+
+  /**
+   * 发送更新密码使用的验证码至邮箱
+   * @param email
+   * @returns
+   */
+  async sendUpdatePasswordCaptcha(email: string) {
+    try {
+      const code = genCaptchaCode();
+      await this.redisHelperService.set(
+        getCaptchaCacheKeyOfUpdatePwd(email),
+        code,
+        5 * 60,
+      );
+      await this.emailHelperService.sendMail(
+        email,
+        `<p>您的注册验证码为：${code}</p >`,
+        '注册验证码',
+      );
+      return '发送成功';
+    } catch (e) {
+      this.logger.error(e.message, e);
+      throw new HttpException('服务器异常', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }

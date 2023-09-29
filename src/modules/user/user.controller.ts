@@ -9,11 +9,13 @@ import {
   Inject,
   UnauthorizedException,
   Logger,
+  BadRequestException,
 } from '@nestjs/common';
 
 // dto
 import { UserLoginDto } from './dto/user-login.dto';
 import { RegisterUserDto } from './dto/register-user.dto';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 
 // services
 import { UserService } from './user.service';
@@ -134,5 +136,34 @@ export class UserController {
       throw new UnauthorizedException('用户未登录');
     }
     return await this.userService.findUserById(userId);
+  }
+
+  /**
+   * POST 更新用户密码
+   * @path /user/update-password
+   * @path /user/admin/update-password
+   */
+  @Post(['update-password', 'admin/update-password'])
+  @NeedLogin()
+  async updatePassword(
+    @GetLoginUserInfo('userId') userId: number,
+    @Body() updatePasswordDto: UpdatePasswordDto,
+  ) {
+    if (!userId) {
+      throw new UnauthorizedException('请先登录');
+    }
+    return await this.userService.updatePassword(userId, updatePasswordDto);
+  }
+
+  /**
+   * 发送更新密码使用的验证码
+   * @path /user/update-password/captcha
+   */
+  @Post('update-password/captcha')
+  async sendUpdatePasswordCaptcha(@Body() email: string) {
+    if (!email) {
+      throw new BadRequestException('请指定关联的邮箱');
+    }
+    return await this.userService.sendUpdatePasswordCaptcha(email);
   }
 }
