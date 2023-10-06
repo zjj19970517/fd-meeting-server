@@ -25,6 +25,11 @@ import { JWTHelperService } from './../../shared/services/jwt-helper.service';
 import { NeedLogin } from 'src/shared/decorators/guard.decorator';
 import { GetLoginUserInfo } from 'src/shared/decorators/user-info-decorator';
 
+import {
+  HTTP_SUCCESS_CODE,
+  HttpResponseEntity,
+} from 'src/shared/http/http-response-entity';
+
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -78,7 +83,7 @@ export class UserController {
     userVo.accessToken = this.jwtHelperService.genAccessToken(userVo);
     // 生成刷新 token
     userVo.refreshToken = this.jwtHelperService.genRefreshToken(userVo);
-    return userVo;
+    return HttpResponseEntity.create(userVo, HTTP_SUCCESS_CODE, '登录成功');
   }
 
   /**

@@ -12,14 +12,13 @@ export class FormatResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const response = context.switchToHttp().getResponse<Response>();
     return next.handle().pipe(
-      map((data) => {
+      map((result) => {
         return {
-          code: response.statusCode,
-          message: 'success',
-          data,
+          code: result.code !== undefined ? result.code : response.statusCode,
+          message: result.message !== undefined ? result.message : 'success',
+          data: result.data,
         };
       }),
     );
-    return next.handle();
   }
 }
