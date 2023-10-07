@@ -1,5 +1,3 @@
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
 import {
   Controller,
   Get,
@@ -11,6 +9,8 @@ import {
   Logger,
   BadRequestException,
 } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 // dto
 import { UserLoginDto } from './dto/user-login.dto';
@@ -25,12 +25,14 @@ import { JWTHelperService } from './../../shared/services/jwt-helper.service';
 import { NeedLogin } from 'src/shared/decorators/guard.decorator';
 import { GetLoginUserInfo } from 'src/shared/decorators/user-info-decorator';
 
+// others
 import {
   HTTP_SUCCESS_CODE,
   HttpResponseEntity,
 } from 'src/shared/http/http-response-entity';
+import { UserModulePaths } from './user.path';
 
-@Controller('user')
+@Controller(UserModulePaths.base)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -76,14 +78,21 @@ export class UserController {
    * POET 用户登录
    * @path /user/login
    */
-  @Post('login')
+  @Post(UserModulePaths.contents.login)
   async userLogin(@Body() userLoginParams: UserLoginDto) {
     const userVo = await this.userService.userLogin(userLoginParams);
     // 生成鉴权 token
     userVo.accessToken = this.jwtHelperService.genAccessToken(userVo);
     // 生成刷新 token
     userVo.refreshToken = this.jwtHelperService.genRefreshToken(userVo);
-    return HttpResponseEntity.create(userVo, HTTP_SUCCESS_CODE, '登录成功');
+    return HttpResponseEntity.create(
+      {
+        accessToken: userVo.accessToken,
+        refreshToken: userVo.refreshToken,
+      },
+      HTTP_SUCCESS_CODE,
+      '登录成功',
+    );
   }
 
   /**
@@ -134,13 +143,18 @@ export class UserController {
    * POST 用户信息查询
    * @path /user/info
    */
-  @Post('info')
+  @Post(UserModulePaths.contents.info)
   @NeedLogin()
   async getUserInfo(@GetLoginUserInfo('userId') userId: number) {
     if (!userId) {
       throw new UnauthorizedException('用户未登录');
     }
-    return await this.userService.findUserById(userId);
+    const userVo = await this.userService.findUserById(userId);
+    // 移除铭感信息
+    delete userVo.userInfo.id;
+    delete userVo.userInfo.username;
+    delete userVo.userInfo.phoneNumber;
+    return HttpResponseEntity.create(userVo, HTTP_SUCCESS_CODE);
   }
 
   /**
