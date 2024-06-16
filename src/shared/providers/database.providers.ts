@@ -1,6 +1,6 @@
 import { createClient } from 'redis';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 
 import entities from '../../entities';
 
@@ -10,7 +10,6 @@ export const DataBaseProviders: Array<any> = [
   // 连接 mysql
   {
     provide: DataBaseProviderName.MYSQL_DATA_SOURCE,
-    imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: async (configService: ConfigService) => {
       console.log('配置', configService);
@@ -37,7 +36,6 @@ export const DataBaseProviders: Array<any> = [
   // 连接 redis
   {
     provide: DataBaseProviderName.REDIS_DATA_SOURCE,
-    imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: async (configService: ConfigService) => {
       const client = createClient({

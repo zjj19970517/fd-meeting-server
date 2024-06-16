@@ -33,8 +33,6 @@ import { EmailHelperService } from './services/email-helper.service';
     }),
   ],
   exports: [
-    // 全局配置中心
-    ConfigModule,
     // 数据库连接
     ...DataBaseProviders,
     // 初始化游戏客户端
@@ -47,7 +45,6 @@ import { EmailHelperService } from './services/email-helper.service';
     EmailHelperService,
   ],
   providers: [
-    ConfigModule,
     ConfigService,
     ...DataBaseProviders,
     ...EmailProviders,
