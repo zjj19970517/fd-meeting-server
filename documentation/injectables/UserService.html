@@ -1,0 +1,1377 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>meeting_server documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/postmark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">meeting_server documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >UserService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/modules/user/user.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Private</span>
+                                <a href="#emailHelperService" >emailHelperService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#logger" >logger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Private</span>
+                                <a href="#permissionRepository" >permissionRepository</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Private</span>
+                                <a href="#redisHelperService" >redisHelperService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Private</span>
+                                <a href="#roleRepository" >roleRepository</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Private</span>
+                                <a href="#userRepository" >userRepository</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#findUserById" >findUserById</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#initTestData" >initTestData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#register" >register</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#sendRegisterCaptcha" >sendRegisterCaptcha</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#sendUpdatePasswordCaptcha" >sendUpdatePasswordCaptcha</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updatePassword" >updatePassword</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#userLogin" >userLogin</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="findUserById"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>findUserById</b></span>
+                        <a href="#findUserById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>findUserById(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, isAdmin: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="221"
+                                    class="link-to-prism">src/modules/user/user.service.ts:221</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>通过用户 ID 获取用户信息</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>userId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>isAdmin</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>false</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initTestData"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>initTestData</b></span>
+                        <a href="#initTestData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initTestData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/modules/user/user.service.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>初始化测试数据</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="register"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>register</b></span>
+                        <a href="#register"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>register(registerUserParams: <a href="../classes/RegisterUserDto.html" target="_self">RegisterUserDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/modules/user/user.service.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>普通用户注册</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>registerUserParams</td>
+                                            <td>
+                                                            <code><a href="../classes/RegisterUserDto.html" target="_self" >RegisterUserDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendRegisterCaptcha"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>sendRegisterCaptcha</b></span>
+                        <a href="#sendRegisterCaptcha"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendRegisterCaptcha(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/modules/user/user.service.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>发送用户注册所需的验证码</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendUpdatePasswordCaptcha"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>sendUpdatePasswordCaptcha</b></span>
+                        <a href="#sendUpdatePasswordCaptcha"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendUpdatePasswordCaptcha(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/modules/user/user.service.ts:290</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>发送更新密码使用的验证码至邮箱</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePassword"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updatePassword</b></span>
+                        <a href="#updatePassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updatePassword(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, updatePasswordDto: <a href="../classes/UpdatePasswordDto.html" target="_self">UpdatePasswordDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="259"
+                                    class="link-to-prism">src/modules/user/user.service.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>修改密码</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>userId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>用户 ID</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>updatePasswordDto</td>
+                                            <td>
+                                                            <code><a href="../classes/UpdatePasswordDto.html" target="_self" >UpdatePasswordDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>更新密码的相关参数</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userLogin"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>userLogin</b></span>
+                        <a href="#userLogin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>userLogin(userLoginParams: <a href="../classes/UserLoginDto.html" target="_self">UserLoginDto</a>, isAdmin)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/modules/user/user.service.ts:174</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>用户登录</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>userLoginParams</td>
+                                            <td>
+                                                            <code><a href="../classes/UserLoginDto.html" target="_self" >UserLoginDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>用户登录接口参数</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>isAdmin</td>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>false</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>是否为管理员</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emailHelperService"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier">Private</span>
+                        <span ><b>emailHelperService</b></span>
+                        <a href="#emailHelperService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/EmailHelperService.html" target="_self" >EmailHelperService</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(EmailHelperService)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/modules/user/user.service.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logger"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>logger</b></span>
+                        <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Logger()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/modules/user/user.service.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="permissionRepository"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier">Private</span>
+                        <span ><b>permissionRepository</b></span>
+                        <a href="#permissionRepository"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../entitys/Permission.html" target="_self" >Repository&lt;Permission&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(RepositoryProvideNames.PERMISSION_REPOSITORY)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/modules/user/user.service.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redisHelperService"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier">Private</span>
+                        <span ><b>redisHelperService</b></span>
+                        <a href="#redisHelperService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/RedisHelperService.html" target="_self" >RedisHelperService</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(RedisHelperService)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/modules/user/user.service.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="roleRepository"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier">Private</span>
+                        <span ><b>roleRepository</b></span>
+                        <a href="#roleRepository"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../entitys/Role.html" target="_self" >Repository&lt;Role&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(RepositoryProvideNames.ROLE_REPOSITORY)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/modules/user/user.service.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userRepository"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier">Private</span>
+                        <span ><b>userRepository</b></span>
+                        <a href="#userRepository"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../entitys/User.html" target="_self" >Repository&lt;User&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(RepositoryProvideNames.USER_REPOSITORY)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/modules/user/user.service.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Repository } from &#x27;typeorm&#x27;;
+import {
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+  Logger,
+} from &#x27;@nestjs/common&#x27;;
+
+// entity
+import { User } from &#x27;./entities/user.entity&#x27;;
+import { Role } from &#x27;./entities/role.entity&#x27;;
+import { Permission } from &#x27;./entities/permission.entity&#x27;;
+
+// dto
+import { RegisterUserDto } from &#x27;./dto/register-user.dto&#x27;;
+import { UserLoginDto } from &#x27;./dto/user-login.dto&#x27;;
+import { UpdatePasswordDto } from &#x27;./dto/update-password.dto&#x27;;
+
+// vo
+import { LoginUserVo } from &#x27;./vo/login-user.vo&#x27;;
+
+// utils
+import { md5Encrypt } from &#x27;src/shared/utils/md5.utils&#x27;;
+import {
+  genCaptchaCode,
+  getCaptchaCacheKey,
+  getCaptchaCacheKeyOfUpdatePwd,
+} from &#x27;./user.utils&#x27;;
+
+// services
+import { RedisHelperService } from &#x27;src/shared/services/redis-helper.service&#x27;;
+import { EmailHelperService } from &#x27;src/shared/services/email-helper.service&#x27;;
+
+// constants
+import { RepositoryProvideNames } from &#x27;src/constants/provider-names&#x27;;
+
+@Injectable()
+export class UserService {
+  private logger &#x3D; new Logger();
+
+  @Inject(RepositoryProvideNames.USER_REPOSITORY)
+  private userRepository: Repository&lt;User&gt;;
+
+  @Inject(RepositoryProvideNames.ROLE_REPOSITORY)
+  private roleRepository: Repository&lt;Role&gt;;
+
+  @Inject(RepositoryProvideNames.PERMISSION_REPOSITORY)
+  private permissionRepository: Repository&lt;Permission&gt;;
+
+  @Inject(RedisHelperService)
+  private redisHelperService: RedisHelperService;
+
+  @Inject(EmailHelperService)
+  private emailHelperService: EmailHelperService;
+
+  /**
+   * 普通用户注册
+   * @param registerUserParams
+   * @returns
+   */
+  async register(registerUserParams: RegisterUserDto) {
+    const captcha &#x3D; await this.redisHelperService.get(
+      getCaptchaCacheKey(registerUserParams.email),
+    );
+
+    if (!captcha) {
+      throw new HttpException(&#x27;验证码已失效&#x27;, HttpStatus.BAD_REQUEST);
+    }
+
+    if (registerUserParams.captcha !&#x3D;&#x3D; captcha) {
+      throw new HttpException(&#x27;验证码不正确&#x27;, HttpStatus.BAD_REQUEST);
+    }
+
+    const usernameHasRegister &#x3D; await this.userRepository.findOneBy({
+      username: registerUserParams.username,
+    });
+
+    if (usernameHasRegister) {
+      throw new HttpException(&#x27;用户已存在&#x27;, HttpStatus.BAD_REQUEST);
+    }
+
+    const user &#x3D; new User();
+    user.username &#x3D; registerUserParams.username;
+    user.password &#x3D; md5Encrypt(registerUserParams.password);
+    user.email &#x3D; registerUserParams.email;
+    user.nickName &#x3D; registerUserParams.nickName;
+
+    try {
+      await this.userRepository.save(user);
+      return &#x27;注册成功&#x27;;
+    } catch (e) {
+      this.logger.error(e, UserService);
+      return &#x27;注册失败&#x27;;
+    }
+  }
+
+  /**
+   * 发送用户注册所需的验证码
+   * @param email
+   */
+  async sendRegisterCaptcha(email: string) {
+    try {
+      const code &#x3D; genCaptchaCode();
+      await this.redisHelperService.set(
+        getCaptchaCacheKey(email),
+        code,
+        5 * 60,
+      );
+      await this.emailHelperService.sendMail(
+        email,
+        &#x60;&lt;p&gt;您的注册验证码为：${code}&lt;/p &gt;&#x60;,
+        &#x27;注册验证码&#x27;,
+      );
+      return &#x27;发送成功&#x27;;
+    } catch (e) {
+      this.logger.error(e.message, e);
+      throw new HttpException(&#x27;服务器异常&#x27;, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  /**
+   * 初始化测试数据
+   */
+  async initTestData() {
+    // 管理员
+    const user1 &#x3D; new User();
+    user1.username &#x3D; &#x27;admin&#x27;;
+    user1.password &#x3D; md5Encrypt(&#x27;admin&#x27;);
+    user1.email &#x3D; &#x27;15235309829@163.com&#x27;;
+    user1.isAdmin &#x3D; true;
+    user1.nickName &#x3D; &#x27;管理员&#x27;;
+    user1.phoneNumber &#x3D; &#x27;17777777711&#x27;;
+
+    // 普通用户
+    const user2 &#x3D; new User();
+    user2.username &#x3D; &#x27;userA&#x27;;
+    user2.password &#x3D; md5Encrypt(&#x27;1234567Aa&#x27;);
+    user2.email &#x3D; &#x27;15235309829@163.com&#x27;;
+    user2.nickName &#x3D; &#x27;用户A&#x27;;
+
+    const role1 &#x3D; new Role();
+    role1.name &#x3D; &#x27;管理员&#x27;;
+
+    const role2 &#x3D; new Role();
+    role2.name &#x3D; &#x27;普通用户&#x27;;
+
+    const permission1 &#x3D; new Permission();
+    permission1.code &#x3D; &#x27;/page1&#x27;;
+    permission1.description &#x3D; &#x27;访问页面 page1&#x27;;
+
+    const permission2 &#x3D; new Permission();
+    permission2.code &#x3D; &#x27;/page2&#x27;;
+    permission2.description &#x3D; &#x27;访问页面 page2&#x27;;
+
+    user1.roles &#x3D; [role1];
+    user2.roles &#x3D; [role2];
+
+    role1.permissions &#x3D; [permission1, permission2];
+    role2.permissions &#x3D; [permission1];
+
+    await this.permissionRepository.save([permission1, permission2]);
+    await this.roleRepository.save([role1, role2]);
+    await this.userRepository.save([user1, user2]);
+    return &#x27;success&#x27;;
+  }
+
+  /**
+   * 用户登录
+   * @param userLoginParams 用户登录接口参数
+   * @param isAdmin 是否为管理员
+   * @returns
+   */
+  async userLogin(userLoginParams: UserLoginDto, isAdmin &#x3D; false) {
+    const user &#x3D; await this.userRepository.findOne({
+      where: {
+        username: userLoginParams.username,
+        isAdmin,
+      },
+      // 级联查询 roles 和 roles.permissions
+      relations: [&#x27;roles&#x27;, &#x27;roles.permissions&#x27;],
+    });
+
+    if (!user) {
+      throw new HttpException(&#x27;用户不存在&#x27;, HttpStatus.BAD_REQUEST);
+    }
+
+    if (user.password !&#x3D;&#x3D; md5Encrypt(userLoginParams.password)) {
+      throw new HttpException(&#x27;密码错误&#x27;, HttpStatus.BAD_REQUEST);
+    }
+
+    const userVo &#x3D; new LoginUserVo();
+    userVo.userInfo &#x3D; {
+      id: user.id,
+      username: user.username,
+      nickName: user.nickName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      avatar: user.avatar,
+      createTime: user.createTime.getTime(),
+      isFrozen: user.isFrozen,
+      isAdmin: user.isAdmin,
+      roles: user.roles.map((item) &#x3D;&gt; item.name),
+      permissions: user.roles.reduce((arr, item) &#x3D;&gt; {
+        item.permissions.forEach((permission) &#x3D;&gt; {
+          if (arr.indexOf(permission) &#x3D;&#x3D;&#x3D; -1) {
+            arr.push(permission);
+          }
+        });
+        return arr;
+      }, []),
+    };
+    return userVo;
+  }
+
+  /**
+   * 通过用户 ID 获取用户信息
+   * @param userId
+   * @param isAdmin
+   */
+  async findUserById(userId: number, isAdmin: boolean &#x3D; false) {
+    const user &#x3D; await this.userRepository.findOne({
+      where: {
+        id: userId,
+        isAdmin,
+      },
+      relations: [&#x27;roles&#x27;, &#x27;roles.permissions&#x27;],
+    });
+    const userVo &#x3D; new LoginUserVo();
+    userVo.userInfo &#x3D; {
+      id: user.id,
+      username: user.username,
+      nickName: user.nickName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      avatar: user.avatar,
+      createTime: user.createTime.getTime(),
+      isFrozen: user.isFrozen,
+      isAdmin: user.isAdmin,
+      roles: user.roles.map((item) &#x3D;&gt; item.name),
+      permissions: user.roles.reduce((arr, item) &#x3D;&gt; {
+        item.permissions.forEach((permission) &#x3D;&gt; {
+          if (arr.indexOf(permission) &#x3D;&#x3D;&#x3D; -1) {
+            arr.push(permission);
+          }
+        });
+        return arr;
+      }, []),
+    };
+    return userVo;
+  }
+
+  /**
+   * 修改密码
+   * @param userId 用户 ID
+   * @param updatePasswordDto 更新密码的相关参数
+   * @returns
+   */
+  async updatePassword(userId: number, updatePasswordDto: UpdatePasswordDto) {
+    const captcha &#x3D; await this.redisHelperService.get(
+      getCaptchaCacheKeyOfUpdatePwd(updatePasswordDto.email),
+    );
+
+    if (!captcha) {
+      throw new HttpException(&#x27;验证码已失效&#x27;, HttpStatus.BAD_REQUEST);
+    }
+
+    if (updatePasswordDto.captcha !&#x3D;&#x3D; captcha) {
+      throw new HttpException(&#x27;验证码不正确&#x27;, HttpStatus.BAD_REQUEST);
+    }
+
+    try {
+      const user &#x3D; await this.userRepository.findOneBy({
+        id: userId,
+      });
+      user.password &#x3D; md5Encrypt(updatePasswordDto.password);
+      await this.userRepository.save(user);
+      return &#x27;密码修改成功&#x27;;
+    } catch (e) {
+      this.logger.error(e, UserService);
+      return &#x27;密码修改失败&#x27;;
+    }
+  }
+
+  /**
+   * 发送更新密码使用的验证码至邮箱
+   * @param email
+   * @returns
+   */
+  async sendUpdatePasswordCaptcha(email: string) {
+    try {
+      const code &#x3D; genCaptchaCode();
+      await this.redisHelperService.set(
+        getCaptchaCacheKeyOfUpdatePwd(email),
+        code,
+        5 * 60,
+      );
+      await this.emailHelperService.sendMail(
+        email,
+        &#x60;&lt;p&gt;您的注册验证码为：${code}&lt;/p &gt;&#x60;,
+        &#x27;注册验证码&#x27;,
+      );
+      return &#x27;发送成功&#x27;;
+    } catch (e) {
+      this.logger.error(e.message, e);
+      throw new HttpException(&#x27;服务器异常&#x27;, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

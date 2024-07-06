@@ -7,7 +7,6 @@ import { configModuleOptions } from './config/module-options';
 // providers
 import { EmailProviders } from './providers/email.providers';
 import { DataBaseProviders } from './providers/database.providers';
-
 // services
 import { JWTHelperService } from './services/jwt-helper.service';
 import { RedisHelperService } from './services/redis-helper.service';
@@ -35,21 +34,27 @@ import { EmailHelperService } from './services/email-helper.service';
   exports: [
     // 数据库连接
     ...DataBaseProviders,
-    // 初始化游戏客户端
+    // 建连邮箱客户端
     ...EmailProviders,
-    // jwt helper
-    JWTHelperService,
-    // redis helper
+
+    // Redis Helper
     RedisHelperService,
-    // email helper
+    // Email Helper
     EmailHelperService,
+    // JWT Helper
+    JWTHelperService,
   ],
   providers: [
-    ConfigService,
+    // 数据库连接
     ...DataBaseProviders,
+    // 建连邮箱客户端
     ...EmailProviders,
+
+    // Redis Helper
     RedisHelperService,
+    // Email Helper
     EmailHelperService,
+    // JWT Helper
     JWTHelperService,
   ],
 })

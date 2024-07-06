@@ -13,16 +13,13 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    // 注册应用所需的全部模块
     // 共享模块
     SharedModule,
     // 用户模块
     UserModule,
-    // ... 其他模块
   ],
   controllers: [AppController],
   providers: [
-    // 根应用 Service
     AppService,
     // 全局守卫
     ...GuardProviders,
