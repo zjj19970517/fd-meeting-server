@@ -2,15 +2,15 @@ import { JwtModule } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import { configModuleOptions } from './config/module-options';
+import { configModuleOptions } from '../../common/config/module-options';
 
 // providers
-import { EmailProviders } from './providers/email.providers';
-import { DataBaseProviders } from './providers/database.providers';
+import { EmailProviders } from '../../common/providers/email.providers';
+import { DataBaseProviders } from '../../common/providers/database.providers';
 // services
-import { JWTHelperService } from './services/jwt-helper.service';
-import { RedisHelperService } from './services/redis-helper.service';
-import { EmailHelperService } from './services/email-helper.service';
+import { JWTHelperService } from '../../common/services/jwt-helper.service';
+import { RedisHelperService } from '../../common/services/redis-helper.service';
+import { EmailHelperService } from '../../common/services/email-helper.service';
 
 // 共享模块
 @Module({

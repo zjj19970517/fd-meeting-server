@@ -19,17 +19,17 @@ import { UpdatePasswordDto } from './dto/update-password.dto';
 
 // services
 import { UserService } from './user.service';
-import { JWTHelperService } from './../../shared/services/jwt-helper.service';
+import { JWTHelperService } from '../../common/services/jwt-helper.service';
 
 // decorators
-import { NeedLogin } from 'src/shared/decorators/guard.decorator';
-import { GetLoginUserInfo } from 'src/shared/decorators/user-info-decorator';
+import { NeedLogin } from 'src/common/decorators/guard.decorator';
+import { GetLoginUserInfo } from 'src/common/decorators/user-info-decorator';
 
 // others
 import {
   HTTP_SUCCESS_CODE,
   HttpResponseEntity,
-} from 'src/shared/http/http-response-entity';
+} from 'src/common/http/http-response-entity';
 import { UserModulePaths } from './user.path';
 
 @Controller(UserModulePaths.base)

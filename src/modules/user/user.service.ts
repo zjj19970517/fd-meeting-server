@@ -21,7 +21,7 @@ import { UpdatePasswordDto } from './dto/update-password.dto';
 import { LoginUserVo } from './vo/login-user.vo';
 
 // utils
-import { md5Encrypt } from 'src/shared/utils/md5.utils';
+import { md5Encrypt } from 'src/common/utils/md5.utils';
 import {
   genCaptchaCode,
   getCaptchaCacheKey,
@@ -29,8 +29,8 @@ import {
 } from './user.utils';
 
 // services
-import { RedisHelperService } from 'src/shared/services/redis-helper.service';
-import { EmailHelperService } from 'src/shared/services/email-helper.service';
+import { RedisHelperService } from 'src/common/services/redis-helper.service';
+import { EmailHelperService } from 'src/common/services/email-helper.service';
 
 // constants
 import { RepositoryProvideNames } from 'src/constants/provider-names';

@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 
 // modules
-import { SharedModule } from './shared/share.module';
+import { SharedModule } from './modules/shared/share.module';
 import { UserModule } from './modules/user/user.module';
 // providers
-import { GuardProviders } from './shared/providers/guard.providers';
-import { InterceptorProviders } from './shared/providers/interceptor.providers';
+import { GuardProviders } from './common/providers/guard.providers';
+import { InterceptorProviders } from './common/providers/interceptor.providers';
 // controllers
 import { AppController } from './app.controller';
 // services
