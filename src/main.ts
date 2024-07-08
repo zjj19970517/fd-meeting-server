@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filter/http-exception/http-exception.filter';
 import { swaggerConfig } from './swagger';
 import { __PROD__ } from './common/utils/env.utils';
+// import { WINSTON_LOGGER_TOKEN } from './modules/shared/logger.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -20,6 +21,9 @@ async function bootstrap() {
   // swagger 文档
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('docs', app, document);
+
+  // 应用自定义的 Logger
+  // app.use(app.get(WINSTON_LOGGER_TOKEN));
 
   // 全局 Pipe
   app.useGlobalPipes(
