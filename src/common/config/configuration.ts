@@ -1,4 +1,4 @@
-import { __DEV__ } from '../utils/env.utils';
+import { __DEV__ } from '@common/utils/env.utils';
 import { genDevelopmentConfig } from './configuration.development';
 import { genProductionConfig } from './configuration.production';
 

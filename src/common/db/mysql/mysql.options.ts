@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 
-import entities from '../../../entities';
+import entities from '@/entities';
 
 /**
  * TypeORM 配置选项

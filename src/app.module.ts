@@ -3,22 +3,22 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RedisModule } from '@nestjs-modules/ioredis';
-// modules
 
+// modules
 // import { UserModule } from './modules/user/user.module';
+import { TestModule } from '@modules/test/test.module';
 // providers
-import { GuardProviders } from './common/providers/guard.providers';
-import { InterceptorProviders } from './common/providers/interceptor.providers';
+import { GuardProviders } from '@common/providers/guard.providers';
+import { InterceptorProviders } from '@common/providers/interceptor.providers';
 // controllers
-import { AppController } from './app.controller';
+import { AppController } from '@/app.controller';
 // services
-import { AppService } from './app.service';
-import { TestModule } from './modules/test/test.module';
+import { AppService } from '@/app.service';
 // options
-import { WinstonOptions } from './common/logger/logger.options';
-import { configModuleOptions } from './common/config/module-options';
-import { createTypeOrmOptions } from './common/db/mysql/mysql.options';
-import { createIoredisOptions } from './common/db/redis/redis.options';
+import { WinstonOptions } from '@common/logger/logger.options';
+import { configModuleOptions } from '@common/config/module-options';
+import { createTypeOrmOptions } from '@common/db/mysql/mysql.options';
+import { createIoredisOptions } from '@common/db/redis/redis.options';
 
 @Module({
   imports: [
@@ -52,6 +52,7 @@ import { createIoredisOptions } from './common/db/redis/redis.options';
     AppService,
     // 全局守卫
     ...GuardProviders,
+
     // 全局拦截器
     ...InterceptorProviders,
   ],

@@ -1,8 +1,9 @@
 import { utilities as nestWinstonModuleUtilities } from 'nest-winston';
 import * as winston from 'winston';
-import { format, transports } from 'winston';
-import { __DEV__ } from '../utils/env.utils';
 import 'winston-daily-rotate-file';
+import { format, transports } from 'winston';
+
+import { __DEV__ } from '@common/utils/env.utils';
 
 /**
  * Winston 配置

@@ -1,7 +1,7 @@
 import { ConfigModuleOptions } from '@nestjs/config';
 
+import { __DEV__ } from '@common/utils/env.utils';
 import configuration from './configuration';
-import { __DEV__ } from '../utils/env.utils';
 
 const envFilePath = ['.env'];
 

@@ -4,9 +4,9 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
-import { AppModule } from './app.module';
-import { swaggerConfig } from './swagger';
-import { HttpExceptionFilter } from './common/filter/http-exception/http-exception.filter';
+import { AppModule } from '@/app.module';
+import { swaggerConfig } from '@/swagger';
+import { HttpExceptionFilter } from '@/common/filter/http-exception/http-exception.filter';
 
 async function bootstrap() {
   // 创建应用
