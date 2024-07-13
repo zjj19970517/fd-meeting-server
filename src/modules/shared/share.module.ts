@@ -1,8 +1,6 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-
-import { configModuleOptions } from '../../common/config/module-options';
+import { ConfigService } from '@nestjs/config';
 
 // providers
 import { EmailProviders } from '../../common/providers/email.providers';
@@ -15,8 +13,6 @@ import { EmailHelperService } from '../../common/services/email-helper.service';
 // 共享模块
 @Module({
   imports: [
-    // 配置模块
-    ConfigModule.forRoot(configModuleOptions),
     // JWT 模块
     JwtModule.registerAsync({
       global: true,
