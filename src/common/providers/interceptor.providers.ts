@@ -10,7 +10,7 @@ export const InterceptorProviders = [
     provide: APP_INTERCEPTOR,
     useClass: FormatResponseInterceptor,
   },
-  // 请求日志记录拦截器
+  // 拦截器 - 请求日志记录
   {
     provide: APP_INTERCEPTOR,
     useClass: InvokeRecordInterceptor,

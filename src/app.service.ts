@@ -14,7 +14,6 @@ export class AppService {
     // this.logger.info('测试 Info 日志');
     // this.logger.debug('测试 Debug 日志');
     // this.logger.error('测试 Debug 日志');
-    console.log('🌈' + this.configService.get('port'));
     return 'App Start Successfully !';
   }
 }

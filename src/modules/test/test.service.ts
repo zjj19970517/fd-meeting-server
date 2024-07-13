@@ -22,7 +22,6 @@ export class TestService {
       configService: this.configService,
     });
     this.logger.error('测试 Error 日志');
-    console.log('🌈 11' + this.configService.get('port'));
     return 'App Start Successfully !';
   }
 }

@@ -16,7 +16,6 @@ export class TestController {
    */
   @Get('get')
   getIndex(): string {
-    console.log('🌈' + this.configService.get('port'));
     return this.testService.getIndex();
   }
 }

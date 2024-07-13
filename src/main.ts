@@ -43,7 +43,7 @@ async function bootstrap() {
 
   // 端口监听
   await app.listen(port);
-  console.log(`\n Meeting Server run at http://localhost:${port}`);
+  console.log(`\n Meeting Server run at http://localhost:${port} \n`);
 }
 
 bootstrap();
