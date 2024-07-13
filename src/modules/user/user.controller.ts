@@ -6,11 +6,10 @@ import {
   Query,
   Inject,
   UnauthorizedException,
-  Logger,
   BadRequestException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
+import { WINSTON_MODULE_NEST_PROVIDER, WinstonLogger } from 'nest-winston';
 
 // dto
 import { UserLoginDto } from './dto/user-login.dto';
@@ -34,15 +33,15 @@ import { UserModulePaths } from './user.path';
 
 @Controller(UserModulePaths.base)
 export class UserController {
-  constructor(private readonly userService: UserService) {}
-
-  private logger = new Logger();
+  constructor(
+    private readonly userService: UserService,
+    @Inject(WINSTON_MODULE_NEST_PROVIDER) private logger: WinstonLogger,
+  ) {
+    this.logger.setContext(UserController.name);
+  }
 
   @Inject(JwtService)
   private jwtService: JwtService;
-
-  @Inject(ConfigService)
-  private configService: ConfigService;
 
   @Inject(JWTHelperService)
   private jwtHelperService: JWTHelperService;
@@ -51,7 +50,7 @@ export class UserController {
    * POST 普通用户注册
    * @path /user/register
    */
-  @Post('register')
+  @Post(UserModulePaths.contents.register)
   register(@Body() registerUserDto: RegisterUserDto) {
     return this.userService.register(registerUserDto);
   }
@@ -134,7 +133,7 @@ export class UserController {
         refresh_token,
       };
     } catch (e) {
-      this.logger.error(e.message, e.stack);
+      this.logger.error(e);
       throw new UnauthorizedException('token 已失效，请重新登录');
     }
   }

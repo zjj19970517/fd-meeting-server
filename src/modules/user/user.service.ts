@@ -1,11 +1,6 @@
 import { Repository } from 'typeorm';
-import {
-  HttpException,
-  HttpStatus,
-  Inject,
-  Injectable,
-  Logger,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { WINSTON_MODULE_NEST_PROVIDER, WinstonLogger } from 'nest-winston';
 
 // entity
 import { User } from './entities/user.entity';
@@ -37,7 +32,11 @@ import { RepositoryProvideNames } from 'src/constants/provider-names';
 
 @Injectable()
 export class UserService {
-  private logger = new Logger();
+  constructor(
+    @Inject(WINSTON_MODULE_NEST_PROVIDER) private logger: WinstonLogger,
+  ) {
+    this.logger.setContext(UserService.name);
+  }
 
   @Inject(RepositoryProvideNames.USER_REPOSITORY)
   private userRepository: Repository<User>;
@@ -90,7 +89,7 @@ export class UserService {
       await this.userRepository.save(user);
       return '注册成功';
     } catch (e) {
-      this.logger.error(e, UserService);
+      this.logger.error(e);
       return '注册失败';
     }
   }
@@ -114,7 +113,7 @@ export class UserService {
       );
       return '发送成功';
     } catch (e) {
-      this.logger.error(e.message, e);
+      this.logger.error(e);
       throw new HttpException('服务器异常', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
@@ -277,7 +276,7 @@ export class UserService {
       await this.userRepository.save(user);
       return '密码修改成功';
     } catch (e) {
-      this.logger.error(e, UserService);
+      this.logger.error(e);
       return '密码修改失败';
     }
   }
@@ -302,7 +301,7 @@ export class UserService {
       );
       return '发送成功';
     } catch (e) {
-      this.logger.error(e.message, e);
+      this.logger.error(e);
       throw new HttpException('服务器异常', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
